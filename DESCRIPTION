@@ -1,0 +1,14 @@
+Package: homeR
+Type: Package
+Title: Residential Home Information
+Version: 0.1.0
+Authors@R: person("Bill", "Zichos", email = "billzichos@hotmail.com",
+                  role = c("aut", "cre"))
+Description: R functions that enable sourcing and plotting of publicly available
+    residential home information.
+License: MIT
+Encoding: UTF-8
+LazyData: true
+Imports:
+    xml2
+RoxygenNote: 6.0.1
