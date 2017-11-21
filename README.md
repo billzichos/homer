@@ -7,21 +7,13 @@ publicly available residential home information.
 Zillow application account.  Free enrollment can be found here -
 https://www.zillow.com/webservice/APIReminder.htm.
 
-2. Store Zillow credentials in a file named zillow_key.txt in the HOME directory.
+2. Store Zillow credentials in a file named zillow_key.txt in the HOME directory.  Your HOME directory can be found by typing the following into the command prompt or terminal.  It is recommended you lock down security on this file to be viewable by only yourself.
 
-Your HOME directory on a Windows machine can be found by typing the
-following into the command prompt.
-
+> # Windows
 > echo \%USERPROFILE\%
-
-Your HOME directory on a Unix/Linux machine can be found by typing the
-following into the terminal.
-
+>
+> Unix/Linux
 > echo $HOME
-
-It is recommended you lock down security on this file to be viewable
-by only yourself.
-
 
 #### Installation
 
