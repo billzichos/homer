@@ -16,8 +16,11 @@
 #' @return XML from Zillow Web Service.  Details of the XML are maitained by
 #' Zillow here - https://www.zillow.com/howto/api/GetZestimate.htm.
 #'
+#' @example home_estimate("36086728")
+#'
 #' @export
-home_estimate <- function(x, zws_id) {
+home_estimate <- function(x, zws_path="~/zillow_key.txt") {
+    zws_id <- readLines(zws_path)
     base_URL <- "http://www.zillow.com/webservice/GetZestimate.htm?"
     URL <- paste0(base_URL,"zws-id=",zws_id,"&zpid=",x)
     xml2::as_list(xml2::read_xml(URL))

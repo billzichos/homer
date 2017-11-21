@@ -4,7 +4,7 @@
 \alias{home_estimate}
 \title{Zillow home estimate}
 \usage{
-home_estimate(x, zws_id)
+home_estimate(x, zws_path = "~/zillow_key.txt")
 }
 \arguments{
 \item{x}{A character string representing a single Zillow ID}
