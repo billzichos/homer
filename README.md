@@ -7,6 +7,14 @@ publicly available residential home information.
 Zillow application account.  Free enrollment can be found here -
 https://www.zillow.com/webservice/APIReminder.htm.
 
+2. Store Zillow credentials in a file named zillow_key.txt in the HOME directory.
+
+[Windows]
+
+[Linux/Unix]
+
+[iOS]
+
 #### Installation
 
 Install this package directly from GitHub.
