@@ -13,10 +13,11 @@ home_estimate(x, zws_id)
 Services key.}
 }
 \value{
-XML from Zillow Web Service.
+XML from Zillow Web Service.  Details of the XML are maitained by
+Zillow here - https://www.zillow.com/howto/api/GetZestimate.htm.
 }
 \description{
-\code home_estimate returns data for one or more homes listed on Zillow.
+\code{home_estimate} returns data for one or more homes listed on Zillow.
 }
 \details{
 Future versions will include the ability to pass in more than one

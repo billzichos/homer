@@ -1,6 +1,6 @@
 #' Zillow home estimate
 #'
-#' \code home_estimate returns data for one or more homes listed on Zillow.
+#' \code{home_estimate} returns data for one or more homes listed on Zillow.
 #'
 #' @param x A character string representing a single Zillow ID
 #' @param zws_id A character string representing a your unique Zillow Web
@@ -13,7 +13,8 @@
 #'
 #' @details Future versions will have different output options.
 #'
-#' @return XML from Zillow Web Service.
+#' @return XML from Zillow Web Service.  Details of the XML are maitained by
+#' Zillow here - https://www.zillow.com/howto/api/GetZestimate.htm.
 #'
 #' @export
 home_estimate <- function(x, zws_id) {
