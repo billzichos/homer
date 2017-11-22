@@ -4,13 +4,16 @@
 \alias{home_estimate}
 \title{Zillow home estimate}
 \usage{
-home_estimate(x, zws_path = "~/zillow_key.txt")
+home_estimate(x, zws_path = "~/zillow_key.txt", format = "list")
 }
 \arguments{
 \item{x}{A character string representing a single Zillow ID}
 
-\item{zws_id}{A character string representing a your unique Zillow Web
+\item{zws_path}{A character string representing a your unique Zillow Web
 Services key.}
+
+\item{format}{Specifies whether the return object is in XML or List format.
+Defaults to list.}
 }
 \value{
 XML from Zillow Web Service.  Details of the XML are maitained by
@@ -22,8 +25,8 @@ Zillow here - https://www.zillow.com/howto/api/GetZestimate.htm.
 \details{
 Future versions will include the ability to pass in more than one
   property.
+}
+\examples{
+home_estimate("36086728")
 
-Link to zillow web services where users obtain an account.
-
-Future versions will have different output options.
 }
