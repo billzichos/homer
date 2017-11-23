@@ -19,9 +19,11 @@ Unix/Linux
 
 Install this package directly from GitHub.
 
-> devtools::install_github("billzichos/homeR")
-
+```r
+devtools::install_github("billzichos/homeR")
+```
 #### Functions
 
-> home_estimate()
-
+```r
+home_estimate()
+```
