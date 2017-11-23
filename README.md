@@ -25,8 +25,8 @@ Windows
 Unix/Linux
 > echo $HOME
 
-### Functions
+### Usage
 
 ```r
-home_estimate()
+home_estimate([zillowpropertyid])
 ```
