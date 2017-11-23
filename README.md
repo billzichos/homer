@@ -1,7 +1,17 @@
-__homeR__ is a collection of R functions that enable sourcing and plotting of
+# homeR
+
+homeR is a collection of R functions that enable sourcing and plotting of
 publicly available residential home information.
 
-#### Requirements
+### Installation
+
+```r
+# Install the development version from GitHub:
+# install.packages("devtools")
+devtools::install_github("billzichos/homeR")
+```
+
+### Requirements
 
 1. You must have a unique Zillow Web Services account.  This is separate from the
 Zillow application account.  Free enrollment can be found here -
@@ -15,14 +25,7 @@ Windows
 Unix/Linux
 > echo $HOME
 
-#### Installation
-
-Install this package directly from GitHub.
-
-```r
-devtools::install_github("billzichos/homeR")
-```
-#### Functions
+### Functions
 
 ```r
 home_estimate()
