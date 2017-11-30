@@ -29,4 +29,6 @@ Unix/Linux
 
 ```r
 home_estimate([zillowpropertyid])
+
+plot_zillow_directory("~/zillow")
 ```
