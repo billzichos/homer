@@ -62,7 +62,7 @@ load_zillow_directory <- function(path=".") {
 #'
 #' @importFrom magrittr "%>%"
 #' @export
-plot_zillow_directory <- function(path=".") {
+plot_zillow_directory <- function(path=".", strip_font_size=17) {
     # presumes you are archiving data created from home_estimate()
     df <- load_zillow_directory(path)
     ggplot2::ggplot(data = df, aes(Date, Amount)) +
@@ -90,6 +90,6 @@ plot_zillow_directory <- function(path=".") {
             , axis.title.x = ggplot2::element_blank()
             , axis.text.y = ggplot2::element_blank()
             , axis.ticks.y = ggplot2::element_blank()
-            , strip.text.y = ggplot2::element_text(size = 17, angle = 180)) +
+            , strip.text.y = ggplot2::element_text(size = strip_font_size, angle = 180)) +
         ggplot2::scale_y_continuous(labels = scales::dollar, position = "right")
 }
