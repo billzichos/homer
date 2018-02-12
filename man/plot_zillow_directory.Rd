@@ -4,7 +4,8 @@
 \alias{plot_zillow_directory}
 \title{Plot Zillow archives}
 \usage{
-plot_zillow_directory(path = ".", strip_font_size = 17)
+plot_zillow_directory(path = ".", strip_font_size = 17, nudge_x = 4,
+  nudge_y = 250, value_size = 4)
 }
 \arguments{
 \item{path}{A character string specifying the path to find Zillow archives.}

@@ -42,9 +42,9 @@ load_zillow_directory <- function(path=".") {
     lapply(dir(path), function(x) {
         l <- xml2::as_list(xml2::read_xml(glue::glue("{path}/{x}"), encoding = "UTF-8"))
         data.frame(
-            House = l$response$address$street[[1]]
-            , Date = readr::parse_date(l$response$zestimate$`last-updated`[[1]], format = "%m/%d/%Y")
-            , Amount = readr::parse_number(l$response$zestimate$amount[[1]])
+            House = l$zestimate$response$address$street[[1]]
+            , Date = readr::parse_date(l$zestimate$response$zestimate$`last-updated`[[1]], format = "%m/%d/%Y")
+            , Amount = readr::parse_number(l$zestimate$response$zestimate$amount[[1]])
         ) %>%
             dplyr::mutate(House = as.character(House))
     }) %>%
@@ -62,27 +62,40 @@ load_zillow_directory <- function(path=".") {
 #'
 #' @importFrom magrittr "%>%"
 #' @export
-plot_zillow_directory <- function(path=".", strip_font_size=17) {
+plot_zillow_directory <- function(path=".", strip_font_size=17, nudge_x = 4.0, nudge_y = 250, value_size = 4) {
     # presumes you are archiving data created from home_estimate()
     df <- load_zillow_directory(path)
     ggplot2::ggplot(data = df, aes(Date, Amount)) +
         ggplot2::geom_line() +
         ggplot2::geom_point(
             data =
-                df %>%
-                    dplyr::group_by(House) %>%
-                    dplyr::summarise(Date = max(Date)) %>%
-                    dplyr::inner_join(df, by = c("House", "Date"))
+                rbind(
+                    df %>%
+                        dplyr::group_by(House) %>%
+                        dplyr::summarise(Date = min(Date)) %>%
+                        dplyr::inner_join(df, by = c("House", "Date"))
+                    , df %>%
+                        dplyr::group_by(House) %>%
+                        dplyr::summarise(Date = max(Date)) %>%
+                        dplyr::inner_join(df, by = c("House", "Date"))
+                    )
             , aes(Date, Amount)
             , color = "red") +
         ggplot2::geom_text(
             data =
-                df %>%
-                    dplyr::group_by(House) %>%
-                    dplyr::summarise(Date = max(Date)) %>%
-                    dplyr::inner_join(df, by = c("House", "Date"))
+                rbind(
+                    df %>%
+                        dplyr::group_by(House) %>%
+                        dplyr::summarise(Date = min(Date)) %>%
+                        dplyr::inner_join(df, by = c("House", "Date"))
+                    , df %>%
+                        dplyr::group_by(House) %>%
+                        dplyr::summarise(Date = max(Date)) %>%
+                        dplyr::inner_join(df, by = c("House", "Date"))
+                    )
             , aes(label = scales::dollar(Amount))
-            , nudge_x = 2) +
+            , nudge_x = nudge_x, nudge_y = nudge_y
+            , size = value_size) +
         ggplot2::facet_grid(House~., scales = "free", switch = "both") +
         ggthemes::theme_tufte(base_size = 14) +
         ggplot2::theme(

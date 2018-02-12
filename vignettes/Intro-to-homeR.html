@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Bill Zichos" />
+
+<meta name="date" content="2018-02-11" />
+
+<title>Introduction to homer</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Introduction to homer</h1>
+<h4 class="author"><em>Bill Zichos</em></h4>
+<h4 class="date"><em>2018-02-11</em></h4>
+
+
+
+<p>Use the homer package with R to collect and analyze publicly available residential real estate data. The plot below represents daily home values over the course of a couple months for a home I just sold. Actually, the buying and selling of my home was the inspiration for this package. I wanted to make sure I had the best available information for decision making. <em>314 Wood Hollow</em> was listed for sale in early October and a sale was final on December 15.</p>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;homeR&quot;</span>)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(<span class="st">&quot;ggplot2&quot;</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">library</span>(<span class="st">&quot;xml2&quot;</span>)</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">library</span>(<span class="st">&quot;glue&quot;</span>)</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw">library</span>(<span class="st">&quot;lubridate&quot;</span>)</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="kw">library</span>(<span class="st">&quot;stringr&quot;</span>)</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">ts &lt;-<span class="st"> </span><span class="kw">paste0</span>(</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">    <span class="kw">year</span>(<span class="kw">Sys.Date</span>())</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">    , <span class="kw">str_sub</span>(<span class="kw">paste0</span>(<span class="st">&quot;0&quot;</span>, <span class="kw">month</span>(<span class="kw">Sys.Date</span>())), <span class="dv">-2</span>)</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">    , <span class="kw">str_sub</span>(<span class="kw">paste0</span>(<span class="st">&quot;0&quot;</span>, <span class="kw">day</span>(<span class="kw">Sys.Date</span>())), <span class="dv">-2</span>))</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">zillow_dir &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="dt">package =</span> <span class="st">&quot;homeR&quot;</span>, <span class="st">&quot;extdata&quot;</span>)</a></code></pre></div>
+<section id="step-1.-obtain-zillow-api-key" class="level3">
+<h3>Step 1. Obtain Zillow API Key</h3>
+<p>Follow the instructions to <a href="https://www.zillow.com/howto/api/APIOverview.htm">Get Started</a> with the Zillow API and obtain an API key. Save the key as a string in a file called zillow_key.txt.</p>
+</section>
+<section id="step-2.-gather-data" class="level3">
+<h3>Step 2. Gather Data</h3>
+<p>Find the Zillow-ID for a property for which you wish to pull information. The Zillow-ID for the 314 Wood Hollow property is <em>36086728</em>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">l &lt;-<span class="st"> </span><span class="kw">home_estimate</span>(<span class="st">&quot;36086728&quot;</span>, <span class="dt">format =</span> <span class="st">&quot;list&quot;</span>)</a></code></pre></div>
+<p>The Zillow API returns a lot of information. Try something like this to pull the estimated property value.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Current value of the property</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">l<span class="op">$</span>zestimate<span class="op">$</span>response<span class="op">$</span>zestimate<span class="op">$</span>amount[[<span class="dv">1</span>]]</a></code></pre></div>
+<pre><code>## [1] &quot;248878&quot;</code></pre>
+<p>Try exploring the rest of list with on your own. The structure (str) of the list is available in the Appendix.</p>
+</section>
+<section id="step-3.-archive-the-data" class="level3">
+<h3>Step 3. Archive the data</h3>
+<p>Switch the format of the data returned from the Zillow API to “xml,” a more suitable format for archiving the data. Then use R functions from the <strong>xml2</strong> package to save to an archive directory.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">home_estimate</span>(<span class="st">&quot;36086728&quot;</span>, <span class="dt">format =</span> <span class="st">&quot;xml&quot;</span>)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw">write_xml</span>(x, <span class="kw">glue</span>(<span class="st">'{zillow_dir}/36086728-{ts}.xml'</span>))</a></code></pre></div>
+<p>HINT: Set up a Scheduled Task to automate this simple operation on a recurring basis.</p>
+</section>
+<section id="step-4.-plot-accumulated-data" class="level3">
+<h3>Step 4. Plot accumulated data</h3>
+<p>After you have some data accumulated over time for a single property, you will be ready to plot the information. Here is a starter function. Feel free to modify to suit your needs.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">homeR<span class="op">::</span><span class="kw">plot_zillow_directory</span>(zillow_dir, <span class="dt">strip_font_size =</span> <span class="dv">12</span>, <span class="dt">nudge_y =</span> <span class="dv">800</span>, <span class="dt">value_size =</span> <span class="fl">2.6</span>)</a></code></pre></div>
+<p><img src="data:image/png;base64,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" /><!-- --></p>
+<p><strong>Multiple Properties</strong> in the archive directory are treated as “facets” on the plot without any additional code.</p>
+</section>
+<section id="appendix" class="level3">
+<h3>Appendix</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">str</span>(l)</a></code></pre></div>
+<pre><code>## List of 1
+##  $ zestimate:List of 3
+##   ..$ request :List of 1
+##   .. ..$ zpid:List of 1
+##   .. .. ..$ : chr &quot;36086728&quot;
+##   ..$ message :List of 2
+##   .. ..$ text:List of 1
+##   .. .. ..$ : chr &quot;Request successfully processed&quot;
+##   .. ..$ code:List of 1
+##   .. .. ..$ : chr &quot;0&quot;
+##   ..$ response:List of 6
+##   .. ..$ zpid           :List of 1
+##   .. .. ..$ : chr &quot;36086728&quot;
+##   .. ..$ links          :List of 4
+##   .. .. ..$ homedetails  :List of 1
+##   .. .. .. ..$ : chr &quot;https://www.zillow.com/homedetails/314-Wood-Hollow-Ct-Annapolis-MD-21409/36086728_zpid/&quot;
+##   .. .. ..$ graphsanddata:List of 1
+##   .. .. .. ..$ : chr &quot;http://www.zillow.com/homedetails/314-Wood-Hollow-Ct-Annapolis-MD-21409/36086728_zpid/#charts-and-data&quot;
+##   .. .. ..$ mapthishome  :List of 1
+##   .. .. .. ..$ : chr &quot;http://www.zillow.com/homes/36086728_zpid/&quot;
+##   .. .. ..$ comparables  :List of 1
+##   .. .. .. ..$ : chr &quot;http://www.zillow.com/homes/comps/36086728_zpid/&quot;
+##   .. ..$ address        :List of 6
+##   .. .. ..$ street   :List of 1
+##   .. .. .. ..$ : chr &quot;314 Wood Hollow Ct&quot;
+##   .. .. ..$ zipcode  :List of 1
+##   .. .. .. ..$ : chr &quot;21409&quot;
+##   .. .. ..$ city     :List of 1
+##   .. .. .. ..$ : chr &quot;Annapolis&quot;
+##   .. .. ..$ state    :List of 1
+##   .. .. .. ..$ : chr &quot;MD&quot;
+##   .. .. ..$ latitude :List of 1
+##   .. .. .. ..$ : chr &quot;39.03105&quot;
+##   .. .. ..$ longitude:List of 1
+##   .. .. .. ..$ : chr &quot;-76.479715&quot;
+##   .. ..$ zestimate      :List of 6
+##   .. .. ..$ amount        :List of 1
+##   .. .. .. ..$ : chr &quot;248878&quot;
+##   .. .. .. ..- attr(*, &quot;currency&quot;)= chr &quot;USD&quot;
+##   .. .. ..$ last-updated  :List of 1
+##   .. .. .. ..$ : chr &quot;02/11/2018&quot;
+##   .. .. ..$ oneWeekChange : list()
+##   .. .. .. ..- attr(*, &quot;deprecated&quot;)= chr &quot;true&quot;
+##   .. .. ..$ valueChange   :List of 1
+##   .. .. .. ..$ : chr &quot;2207&quot;
+##   .. .. .. ..- attr(*, &quot;duration&quot;)= chr &quot;30&quot;
+##   .. .. .. ..- attr(*, &quot;currency&quot;)= chr &quot;USD&quot;
+##   .. .. ..$ valuationRange:List of 2
+##   .. .. .. ..$ low :List of 1
+##   .. .. .. .. ..$ : chr &quot;236434&quot;
+##   .. .. .. .. ..- attr(*, &quot;currency&quot;)= chr &quot;USD&quot;
+##   .. .. .. ..$ high:List of 1
+##   .. .. .. .. ..$ : chr &quot;261322&quot;
+##   .. .. .. .. ..- attr(*, &quot;currency&quot;)= chr &quot;USD&quot;
+##   .. .. ..$ percentile    :List of 1
+##   .. .. .. ..$ : chr &quot;12&quot;
+##   .. ..$ localRealEstate:List of 1
+##   .. .. ..$ region:List of 2
+##   .. .. .. ..$ zindexValue:List of 1
+##   .. .. .. .. ..$ : chr &quot;392,000&quot;
+##   .. .. .. ..$ links      :List of 3
+##   .. .. .. .. ..$ overview      :List of 1
+##   .. .. .. .. .. ..$ : chr &quot;http://www.zillow.com/local-info/MD-Annapolis/r_16773/&quot;
+##   .. .. .. .. ..$ forSaleByOwner:List of 1
+##   .. .. .. .. .. ..$ : chr &quot;http://www.zillow.com/annapolis-md/fsbo/&quot;
+##   .. .. .. .. ..$ forSale       :List of 1
+##   .. .. .. .. .. ..$ : chr &quot;http://www.zillow.com/annapolis-md/&quot;
+##   .. .. .. ..- attr(*, &quot;name&quot;)= chr &quot;Annapolis&quot;
+##   .. .. .. ..- attr(*, &quot;id&quot;)= chr &quot;16773&quot;
+##   .. .. .. ..- attr(*, &quot;type&quot;)= chr &quot;city&quot;
+##   .. ..$ regions        :List of 4
+##   .. .. ..$ zipcode-id:List of 1
+##   .. .. .. ..$ : chr &quot;66882&quot;
+##   .. .. ..$ city-id   :List of 1
+##   .. .. .. ..$ : chr &quot;16773&quot;
+##   .. .. ..$ county-id :List of 1
+##   .. .. .. ..$ : chr &quot;3152&quot;
+##   .. .. ..$ state-id  :List of 1
+##   .. .. .. ..$ : chr &quot;27&quot;
+##   ..- attr(*, &quot;schemaLocation&quot;)= chr &quot;http://www.zillow.com/static/xsd/Zestimate.xsd https://www.zillowstatic.com/vstatic/56a6020/static/xsd/Zestimate.xsd&quot;
+##   ..- attr(*, &quot;xmlns:xsi&quot;)= chr &quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+##   ..- attr(*, &quot;xmlns:Zestimate&quot;)= chr &quot;http://www.zillow.com/static/xsd/Zestimate.xsd&quot;</code></pre>
+</section>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
