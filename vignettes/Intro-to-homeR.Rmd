@@ -4,7 +4,7 @@ author: "Bill Zichos"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Introduction to homeR}
+  %\VignetteIndexEntry{Introduction to homer}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -12,7 +12,7 @@ vignette: >
 Use the homer package with R to collect and analyze publicly available residential real estate data.  The plot below represents daily home values over the course of a couple months for a home I just sold.  Actually, the buying and selling of my home was the inspiration for this package.  I wanted to make sure I had the best available information for decision making.  *314 Wood Hollow* was listed for sale in early October and a sale was final on December 15.
 
 ```{r libraries, echo=FALSE, message=FALSE, warning=FALSE}
-library("homeR")
+library("homer")
 library("ggplot2")
 library("xml2")
 library("glue")
@@ -23,11 +23,11 @@ ts <- paste0(
     year(Sys.Date())
     , str_sub(paste0("0", month(Sys.Date())), -2)
     , str_sub(paste0("0", day(Sys.Date())), -2))
-zillow_dir <- system.file(package = "homeR", "extdata")
+zillow_dir <- system.file(package = "homer", "extdata")
 ```
 
 ```{r, fig.width=7.2, fig.height=2, echo=FALSE}
-homeR::plot_zillow_directory(zillow_dir, strip_font_size = 12, nudge_y = 800, value_size = 2.6)
+homer::plot_zillow_directory(zillow_dir, strip_font_size = 12, nudge_y = 800, value_size = 2.6)
 ```
 
 ```{r libraries, eval=FALSE}
@@ -49,7 +49,6 @@ ZILLOWAPI="[Your API key here]"
 
 # Save the file.
 ```
-
 
 ### Step 2. Gather Data
 
@@ -88,7 +87,7 @@ HINT: Set up a Scheduled Task to automate this simple operation on a recurring b
 After you have some data accumulated over time for a single property, you will be ready to plot the information.  Here is a starter function.  Feel free to modify to suit your needs.
 
 ```{r, fig.width=7.2, fig.height=2}
-homeR::plot_zillow_directory(zillow_dir, strip_font_size = 12, nudge_y = 800, value_size = 2.6)
+homer::plot_zillow_directory(zillow_dir, strip_font_size = 12, nudge_y = 800, value_size = 2.6)
 ```
 
 __Multiple Properties__ in the archive directory are treated as "facets" on the plot without any additional code. 
@@ -99,4 +98,3 @@ __Multiple Properties__ in the archive directory are treated as "facets" on the 
 
 ```{r list_structure}
 ```
-

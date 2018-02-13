@@ -1,6 +1,6 @@
-# homeR
+# homer
 
-homeR is a collection of R functions that enable sourcing and plotting of
+homer is a collection of R functions that enable sourcing and plotting of
 publicly available residential home information.
 
 ### Installation
@@ -8,7 +8,7 @@ publicly available residential home information.
 ```r
 # Install the development version from GitHub:
 # install.packages("devtools")
-devtools::install_github("billzichos/homeR")
+devtools::install_github("billzichos/homer")
 ```
 
 ### Requirements

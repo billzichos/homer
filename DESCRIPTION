@@ -1,4 +1,4 @@
-Package: homeR
+Package: homer
 Type: Package
 Date: 2017-11-20
 Title: Residential Home Information
@@ -20,6 +20,8 @@ Imports:
     , ggthemes
     , readr
     , magrittr
+    , lubridate
+    , stringr
 RoxygenNote: 6.0.1
 Suggests: knitr,
     rmarkdown
