@@ -4,13 +4,10 @@
 \alias{home_estimate}
 \title{Zillow home estimate}
 \usage{
-home_estimate(x, zws_path = "~/zillow_key.txt", format = "list")
+home_estimate(x, format = "list")
 }
 \arguments{
 \item{x}{A character string representing a single Zillow ID}
-
-\item{zws_path}{A character string representing a your unique Zillow Web
-Services key.}
 
 \item{format}{Specifies whether the return object is in XML or List format.
 Defaults to list.}
@@ -20,7 +17,7 @@ XML from Zillow Web Service.  Details of the XML are maitained by
 Zillow here - https://www.zillow.com/howto/api/GetZestimate.htm.
 }
 \description{
-\code{home_estimate} returns data for one or more homes listed on Zillow.
+\code{home_estimate} returns data for a single home listed on Zillow.
 }
 \details{
 Future versions will include the ability to pass in more than one

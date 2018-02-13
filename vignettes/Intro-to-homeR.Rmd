@@ -36,7 +36,20 @@ homeR::plot_zillow_directory(zillow_dir, strip_font_size = 12, nudge_y = 800, va
 
 ### Step 1. Obtain Zillow API Key
 
-Follow the instructions to [Get Started](https://www.zillow.com/howto/api/APIOverview.htm) with the Zillow API and obtain an API key.  Save the key as a string in a file called zillow_key.txt.
+Follow the instructions to [Get Started](https://www.zillow.com/howto/api/APIOverview.htm) with the Zillow API and obtain an API key.  Save the key your .Renviron startup file.
+
+```{r, eval=FALSE}
+# Open the .Renviron file.
+file.edit("~/.Renviron")
+```
+
+```
+# Add the following line:
+ZILLOWAPI="[Your API key here]"
+
+# Save the file.
+```
+
 
 ### Step 2. Gather Data
 
@@ -57,7 +70,7 @@ l$zestimate$response$zestimate$amount[[1]]
 str(l)
 ```
 
-Try exploring the rest of list with on your own.  The structure (str) of the list is available in the Appendix. 
+Try exploring the rest of list with on your own.  The structure (str) of the list is available in the [Appendix](#appendix).
 
 ### Step 3. Archive the data
 
@@ -79,6 +92,8 @@ homeR::plot_zillow_directory(zillow_dir, strip_font_size = 12, nudge_y = 800, va
 ```
 
 __Multiple Properties__ in the archive directory are treated as "facets" on the plot without any additional code. 
+
+<a name="appendix"></a>
 
 ### Appendix
 

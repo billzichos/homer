@@ -1,10 +1,8 @@
 #' Zillow home estimate
 #'
-#' \code{home_estimate} returns data for one or more homes listed on Zillow.
+#' \code{home_estimate} returns data for a single home listed on Zillow.
 #'
 #' @param x A character string representing a single Zillow ID
-#' @param zws_path A character string representing a your unique Zillow Web
-#'           Services key.
 #' @param format Specifies whether the return object is in XML or List format.
 #'         Defaults to list.
 #'
@@ -17,8 +15,8 @@
 #' @examples home_estimate("36086728")
 #'
 #' @export
-home_estimate <- function(x, zws_path="~/zillow_key.txt", format="list") {
-    zws_id <- readLines(zws_path)
+home_estimate <- function(x, format="list") {
+    zws_id <- Sys.getenv("ZILLOWAPI")
     base_URL <- "http://www.zillow.com/webservice/GetZestimate.htm?"
     URL <- paste0(base_URL,"zws-id=",zws_id,"&zpid=",x)
     if (format=="list") {
