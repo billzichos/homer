@@ -8,7 +8,7 @@ publicly available residential home information.
 ```r
 # Install the development version from GitHub:
 # install.packages("devtools")
-devtools::install_github("billzichos/homer")
+devtools::install_github("billzichos/homer", build_vignettes = T)
 ```
 
 ### Requirements
