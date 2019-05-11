@@ -19,11 +19,7 @@ https://www.zillow.com/webservice/APIReminder.htm.
 
 2. Store Zillow credentials in the .Renviron startup file in your HOME directory.
 
-> file.edit("~/.Renviron")
-
-> ZILLOWAPI="[Your API Key Here]"
-
-Remember to save!
+> Sys.setenv(ZILLOWAPI = "[Your API key here]")
 
 ### Usage
 
